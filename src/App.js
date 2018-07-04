@@ -17,48 +17,48 @@ class App extends Component {
   // componentWillUpdate(), render(), componentDidUpdate() 이 3개는 Render에 관련된 내용임
 
   state = {
-    movies: [
-      {
-        title: "Zootopia",
-        poster: "https://images-na.ssl-images-amazon.com/images/I/81nEtdN0f9L._SY606_.jpg"
-      },
-      {
-        title: "Toy Story",
-        poster: "https://i.pinimg.com/originals/59/82/e3/5982e3ae9bfb8a7f1f1491c75af69590.jpg"
-      },
-      {
-        title: "UP",
-        poster: "https://de1imrko8s7v6.cloudfront.net/movies/posters/up_1391712397.jpg"
-      },
-      {
-        title: "WALL-E",
-        poster: "https://images-na.ssl-images-amazon.com/images/I/51RoZRgIHtL.jpg"
-      },
-    ]
   }
 
   componentDidMount(){
     setTimeout(() => {
       this.setState({
         movies: [
-          ...this.state.movies,
+          {
+            title: "Zootopia",
+            poster: "https://images-na.ssl-images-amazon.com/images/I/81nEtdN0f9L._SY606_.jpg"
+          },
+          {
+            title: "Toy Story",
+            poster: "https://i.pinimg.com/originals/59/82/e3/5982e3ae9bfb8a7f1f1491c75af69590.jpg"
+          },
+          {
+            title: "UP",
+            poster: "https://de1imrko8s7v6.cloudfront.net/movies/posters/up_1391712397.jpg"
+          },
+          {
+            title: "WALL-E",
+            poster: "https://images-na.ssl-images-amazon.com/images/I/51RoZRgIHtL.jpg"
+          },
           {
             title: "FROZEN",
             poster: "https://is1-ssl.mzstatic.com/image/thumb/Video122/v4/26/15/25/261525be-76a6-3fd4-06a3-db858ab55137/source/1200x630bb.jpg"
-          } 
+          },
         ]
       })
-    }, 1000)
+    }, 2000)
+  }
+
+  _renderMovies = () => {
+    const movies = this.state.movies.map((movie, index) => {
+      return <Movie title={movie.title} poster={movie.poster} key={index} />
+    })
+    return movies
   }
 
   render() {
     return (
       <div className="App">
-        {
-          this.state.movies.map((movie, index) => {
-            return <Movie title={movie.title} poster={movie.poster} key={index} />
-          })
-        }
+        {this.state.movies ? this._renderMovies() : "Loading..."}
       </div>
     );
   }
