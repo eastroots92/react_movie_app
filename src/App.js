@@ -35,9 +35,22 @@ class App extends Component {
   // shouldComponentUpdate()에서 변경될 컴포넌트를 확인 훌 차이점이 있는지 확인하다. 있으면 '== true'라고 생각하게 된다.
   // componentWillUpdate(), render(), componentDidUpdate() 이 3개는 Render에 관련된 내용임
 
+  state = {
+    greeting : 'Hello!!',
+  }
+
+  componentDidMount(){
+    setTimeout(() => {
+      this.setState({
+        greeting: "Hello again!"
+      })
+    },2000)
+  }
+
   render() {
     return (
       <div className="App">
+        {this.state.greeting}
         {
           movies.map((movie, index) => {
             return <Movie title={movie.title} poster={movie.poster} key={index} />
